@@ -19,16 +19,16 @@ public class TorneoAmistosoTest {
         turno = new Turno("Lunes", "08:00", "12:00");
         torneoAmistoso = new TorneoAmistoso(juego, 5, turno, true); 
 
-        clienteFan = new Cliente(1, "JuanFan", "juan@mail.com", "123", 0, true);
+        clienteFan = new Cliente(1, "JuanFan", "juan@gmail.com", "123", 0, true);
         clienteFan.setJuegosFavoritos("Catan"); 
 
-        clienteRegular = new Cliente(2, "PedroReg", "pedro@mail.com", "123", 0, true);
+        clienteRegular = new Cliente(2, "PedroReg", "pedro@gmail.com", "123", 0, true);
     }
 
     @Test
     public void testReservaCuposFanaticos() {
-        Cliente c1 = new Cliente(11, "Cliente1", "c1@mail.com", "123", 0, true);
-        Cliente c2 = new Cliente(12, "Cliente2", "c2@mail.com", "123", 0, true);
+        Cliente c1 = new Cliente(11, "Cliente1", "c1@gmail.com", "123", 0, true);
+        Cliente c2 = new Cliente(12, "Cliente2", "c2@gmail.com", "123", 0, true);
         
         torneoAmistoso.inscribir(c1, 3);
         torneoAmistoso.inscribir(c2, 1);

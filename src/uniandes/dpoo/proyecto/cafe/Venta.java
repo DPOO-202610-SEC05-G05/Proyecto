@@ -15,7 +15,7 @@ public abstract class Venta {
         this.fecha = fecha;
         this.subtotal = subtotal;
         this.comprador = comprador;
-        this.esValida = true;
+        this.esValida = esValida;
     }
 
     public int getId(){

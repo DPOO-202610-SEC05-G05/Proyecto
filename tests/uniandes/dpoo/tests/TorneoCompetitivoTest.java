@@ -22,8 +22,8 @@ public class TorneoCompetitivoTest {
         
         torneoCompetitivo = new TorneoCompetitivo(juego, 10, turno, true);
         
-        clienteRegular = new Cliente(2, "PedroReg", "pedro@mail.com", "123", 0, true);
-        empleado = new Empleado(3, "AnaEmp", "ana@mail.com", "123", turno, true) {};
+        clienteRegular = new Cliente(2, "PedroReg", "pedro@gmail.com", "123", 0, true);
+        empleado = new Empleado(3, "AnaEmp", "ana@gmail.com", "123", turno, true) {};
     }
 
     @Test
