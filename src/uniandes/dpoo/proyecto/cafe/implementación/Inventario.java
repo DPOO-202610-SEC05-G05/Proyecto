@@ -1,4 +1,4 @@
-package uniandes.dpoo.proyecto.cafe;
+package uniandes.dpoo.proyecto.cafe.implementación;
 
 public abstract class Inventario {
     protected Juego juego;

@@ -1,4 +1,4 @@
-package uniandes.dpoo.proyecto.cafe;
+package uniandes.dpoo.proyecto.cafe.implementación;
 public class Bebida extends ProductoMenu {
     private boolean esCaliente;
     private boolean esAlcoholica;

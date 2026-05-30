@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import uniandes.dpoo.proyecto.cafe.*; 
+import uniandes.dpoo.proyecto.cafe.implementación.*; 
 
 public class AdministradorTest {
 
