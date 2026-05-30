@@ -9,7 +9,7 @@ public class Interfaz extends JFrame {
     private CardLayout cardLayout;
 
     public Interfaz() {
-        setTitle("Dulces & Dados Café - Mockup");
+        setTitle("Dulces & Dados - Café");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
