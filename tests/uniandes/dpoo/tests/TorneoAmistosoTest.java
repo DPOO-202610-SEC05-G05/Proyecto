@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import uniandes.dpoo.proyecto.cafe.*; 
+import uniandes.dpoo.proyecto.cafe.implementación.*; 
 
 public class TorneoAmistosoTest {
     private Juego juego;

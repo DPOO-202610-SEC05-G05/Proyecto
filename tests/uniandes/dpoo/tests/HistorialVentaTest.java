@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import uniandes.dpoo.proyecto.cafe.*; 
+import uniandes.dpoo.proyecto.cafe.implementación.*; 
 
 public class HistorialVentaTest {
     private HistorialVenta historial;

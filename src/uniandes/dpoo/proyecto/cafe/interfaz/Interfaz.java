@@ -3,12 +3,12 @@ package uniandes.dpoo.proyecto.cafe.interfaz;
 import javax.swing.*;
 import java.awt.*;
 
-public class interfaz extends JFrame {
+public class Interfaz extends JFrame {
     
     private JPanel panelPrincipal;
     private CardLayout cardLayout;
 
-    public interfaz() {
+    public Interfaz() {
         setTitle("Dulces & Dados - Café");
         setSize(900, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -223,7 +223,7 @@ public class interfaz extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new interfaz().setVisible(true);
+            new Interfaz().setVisible(true);
         });
     }
 }

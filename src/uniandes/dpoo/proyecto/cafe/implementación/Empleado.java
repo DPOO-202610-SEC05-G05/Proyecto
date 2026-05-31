@@ -1,4 +1,8 @@
 package uniandes.dpoo.proyecto.cafe.implementación;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b91631047a9b8999e30f38d6077c05492653beb9
 import java.time.LocalDate;
 
 public abstract class Empleado extends Usuario {
