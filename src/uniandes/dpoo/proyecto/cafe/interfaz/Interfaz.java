@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VentanaPrincipal extends JFrame {
+public class Interfaz extends JFrame {
     
     private SistemaCafe sistema; 
     private Usuario usuarioActual; 
@@ -38,7 +38,7 @@ public class VentanaPrincipal extends JFrame {
     private DefaultTableModel modeloTorneosEmpleado;
     private DefaultTableModel modeloTorneosAdmin;
 
-    public VentanaPrincipal() {
+    public Interfaz() {
         sistema = new SistemaCafe();
         sistema.arrancarSistema(); 
 
@@ -196,14 +196,14 @@ public class VentanaPrincipal extends JFrame {
 
 
         JPanel panelCatalogo = new JPanel(new BorderLayout());
-        String[] colCatalogo = {"ID", "Nombre", "Categoría", "Jugadores", "Dificultad (! = Alta)"};
+        String[] colCatalogo = {"ID", "Nombre", "Categoría", "Jugadores", "Dificultad ( >:)  = Alta)"};
         modeloCatalogo = new DefaultTableModel(colCatalogo, 0);
         JTable tablaCatalogo = new JTable(modeloCatalogo);
         panelCatalogo.add(new JScrollPane(tablaCatalogo), BorderLayout.CENTER);
 
         JPanel panelAccionesCatalogo = new JPanel();
         JButton btnPedirPrestamo = new JButton("Solicitar Préstamo");
-        JButton btnAddFavorito = new JButton(" <3 (Añadir a Favoritos)");
+        JButton btnAddFavorito = new JButton(" <3 Añadir a Favoritos");
         
         btnPedirPrestamo.addActionListener(e -> {
             int fila = tablaCatalogo.getSelectedRow();
@@ -216,11 +216,11 @@ public class VentanaPrincipal extends JFrame {
                     inv.setCantidadDisponible(inv.getCantidadDisponible() - 1);
                     sistema.registrarNuevoPrestamo(nuevoPrestamo);
                     
-                    JOptionPane.showMessageDialog(this, "Préstamo del juego '" + nombreJuego + "' registrado con éxito.\n Buen juego :)");
+                    JOptionPane.showMessageDialog(this, "Préstamo del juego '" + nombreJuego + "' registrado con éxito.\n¡Disfrútalo en tu mesa!");
                     actualizarPanelAdmin(); 
                     actualizarPanelCliente(); 
                 } else {
-                    JOptionPane.showMessageDialog(this, "No hay copias disponibles.");
+                    JOptionPane.showMessageDialog(this, "No hay copias disponibles para prestar de este juego.");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Selecciona un juego del catálogo primero.");
@@ -239,7 +239,7 @@ public class VentanaPrincipal extends JFrame {
 
         panelAccionesCatalogo.add(btnPedirPrestamo);
         panelAccionesCatalogo.add(btnAddFavorito);
-        panelCatalogo.add(panelAccionesCatalogo, BorderLayout.SOUTH);
+        panelCatalogo.add(panelAccionesCatalogo, BorderLayout.SOUTH); 
         tabbedPane.addTab("🎮 Catálogo (Para Jugar Aquí)", panelCatalogo);
 
 
@@ -300,6 +300,7 @@ public class VentanaPrincipal extends JFrame {
                         VentaJuego nuevaVenta = c.comprarJuego(invVenta.getJuego(), (int)(Math.random()*1000), invVenta);
                         sistema.registrarNuevaVenta(nuevaVenta);
                         c.setPuntos(puntosAntes + 2); 
+                        
                         JOptionPane.showMessageDialog(this, "¡Compra Exitosa!\nHas ganado 2 puntos de fidelidad adicionales por tu compra.");
                         actualizarPanelAdmin(); 
                         actualizarPanelCliente(); 
@@ -314,8 +315,7 @@ public class VentanaPrincipal extends JFrame {
 
         panelAccionesTienda.add(btnComprar);
         panelTienda.add(panelAccionesTienda, BorderLayout.SOUTH);
-        tabbedPane.addTab("🛒 Tienda de Juegos (Comprar)", panelTienda);
-
+        tabbedPane.addTab("Tienda de Juegos (Comprar)", panelTienda);
 
         JPanel panelMesa = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -330,7 +330,7 @@ public class VentanaPrincipal extends JFrame {
 
         gbc.gridx = 0; gbc.gridy = 1;
         gbc.gridwidth = 2;
-        JButton btnReservarMesa = new JButton("🪑 Reservar Mesa");
+        JButton btnReservarMesa = new JButton("Reservar Mesa");
         
         btnReservarMesa.addActionListener(e -> {
             int numPersonas = (int) spinPersonas.getValue();
@@ -344,8 +344,7 @@ public class VentanaPrincipal extends JFrame {
         });
         
         panelMesa.add(btnReservarMesa, gbc);
-        tabbedPane.addTab("Reservar Mesa", panelMesa);
-
+        tabbedPane.addTab("🪑 Reservar Mesa", panelMesa);
 
         JPanel panelTorneosC = new JPanel(new BorderLayout());
         String[] colTorneosC = {"Juego", "Tipo", "Horario", "Cupos Restantes"};
@@ -355,7 +354,7 @@ public class VentanaPrincipal extends JFrame {
 
         JPanel pnlAccionesTC = new JPanel();
         JSpinner spinCuposC = new JSpinner(new SpinnerNumberModel(1, 1, 3, 1)); 
-        JButton btnInscribirC = new JButton("Inscribirse (Solo/Grupal)");
+        JButton btnInscribirC = new JButton(" Inscribirse (Solo/Grupal)");
         
         btnInscribirC.addActionListener(e -> {
             int fila = tablaTorneosC.getSelectedRow();
@@ -394,7 +393,7 @@ public class VentanaPrincipal extends JFrame {
             modeloCatalogo.setRowCount(0);
             List<Juego> disponibles = sistema.juegosDisponiblesPrestamo();
             for (Juego j : disponibles) {
-                String dificultad = j.isEsDificil() ? "! Alta" : ":) Normal";
+                String dificultad = j.isEsDificil() ? " >:) Alta" : " :) Normal";
                 Object[] fila = { j.getId(), j.getNombre(), j.getCategoria(), j.getMinJugadores() + "-" + j.getMaxJugadores(), dificultad };
                 modeloCatalogo.addRow(fila);
             }
@@ -439,6 +438,11 @@ public class VentanaPrincipal extends JFrame {
 
         JTabbedPane tabbedPaneAdmin = new JTabbedPane();
 
+
+        tabbedPaneAdmin.addChangeListener(e -> {
+            actualizarPanelAdmin();
+        });
+
         JPanel panelGraficas = new JPanel(new GridLayout(1, 2, 10, 10));
         panelGraficas.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
@@ -454,7 +458,7 @@ public class VentanaPrincipal extends JFrame {
         tabDashboard.add(panelGraficas, BorderLayout.CENTER);
         tabDashboard.add(pnlLinea, BorderLayout.SOUTH);
         
-        tabbedPaneAdmin.addTab("📊 Dashboard Estadístico", tabDashboard);
+        tabbedPaneAdmin.addTab(" Dashboard Estadístico", tabDashboard);
 
 
         JPanel tabInventario = new JPanel(new BorderLayout());
@@ -539,7 +543,8 @@ public class VentanaPrincipal extends JFrame {
         pnlAccionesInv.add(btnEstado);
         tabInventario.add(pnlAccionesInv, BorderLayout.SOUTH);
         
-        tabbedPaneAdmin.addTab("📦 Gestión de Inventarios", tabInventario);
+        tabbedPaneAdmin.addTab("Gestión de Inventarios", tabInventario);
+
 
         JPanel tabTurnos = new JPanel(new BorderLayout());
         JPanel pnlTurnosCentro = new JPanel(new GridLayout(2, 1, 10, 10));
@@ -571,7 +576,45 @@ public class VentanaPrincipal extends JFrame {
         
         JButton btnAsignarTurno = new JButton("Asignar Nuevo Turno a Empleado");
         btnAsignarTurno.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Funcionalidad de asignación en desarrollo.");
+            try {
+                String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID del empleado (Ej. 2 para Carlos):");
+                if (idStr != null && !idStr.trim().isEmpty()) {
+                    int id = Integer.parseInt(idStr);
+                    Usuario u = sistema.buscarUsuario(id);
+                    
+                    if (u != null && u instanceof Empleado) {
+                        Empleado emp = (Empleado) u;
+                        
+                        JPanel panelTurnoN = new JPanel(new GridLayout(3, 2, 5, 5));
+                        JTextField txtDia = new JTextField();
+                        JTextField txtInicio = new JTextField("08:00");
+                        JTextField txtFin = new JTextField("16:00");
+                        
+                        panelTurnoN.add(new JLabel("Día (Ej. Lunes):"));
+                        panelTurnoN.add(txtDia);
+                        panelTurnoN.add(new JLabel("Hora Inicio:"));
+                        panelTurnoN.add(txtInicio);
+                        panelTurnoN.add(new JLabel("Hora Fin:"));
+                        panelTurnoN.add(txtFin);
+                        
+                        int result = JOptionPane.showConfirmDialog(this, panelTurnoN, 
+                                 "Asignar Turno a " + emp.getUsername(), JOptionPane.OK_CANCEL_OPTION);
+                                 
+                        if (result == JOptionPane.OK_OPTION && !txtDia.getText().trim().isEmpty()) {
+                            Turno nuevoTurno = new Turno(txtDia.getText(), txtInicio.getText(), txtFin.getText());
+                            emp.setTurno(nuevoTurno);
+                            JOptionPane.showMessageDialog(this, "Turno asignado exitosamente a " + emp.getUsername());
+                            
+                            solicitudesTurnos.removeIf(s -> s.contains(emp.getUsername()));
+                            actualizarPanelAdmin();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se encontró un empleado con el ID " + id + ".", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "ID inválido. Debe ingresar un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
         
         pnlBotonesTurno.add(btnVerSolicitudesAdmin);
@@ -579,7 +622,7 @@ public class VentanaPrincipal extends JFrame {
         pnlTurnosCentro.add(pnlBotonesTurno);
         
         tabTurnos.add(pnlTurnosCentro, BorderLayout.NORTH);
-        tabbedPaneAdmin.addTab("👥 Empleados y Turnos", tabTurnos);
+        tabbedPaneAdmin.addTab("Empleados y Turnos", tabTurnos);
 
         JPanel tabAdminTorneos = new JPanel(new BorderLayout());
         String[] colAdminTor = {"Juego", "Tipo", "Horario", "Cupos Restantes"};
@@ -591,7 +634,7 @@ public class VentanaPrincipal extends JFrame {
         JTextField txtJuego = new JTextField(10);
         JComboBox<String> cmbTipo = new JComboBox<>(new String[]{"Amistoso", "Competitivo"});
         JSpinner spinCuposT = new JSpinner(new SpinnerNumberModel(10, 2, 50, 1));
-        JButton btnCrearTorneo = new JButton("➕ Crear Torneo");
+        JButton btnCrearTorneo = new JButton("Crear Torneo");
         
         btnCrearTorneo.addActionListener(e -> {
             String nomJuego = txtJuego.getText();
@@ -690,7 +733,7 @@ public class VentanaPrincipal extends JFrame {
                     int anguloVenta = (int) Math.round((copiasVenta * 360.0) / total);
                     int anguloPrestamo = 360 - anguloVenta;
                     
-                    g2.setColor(new Color(65, 105, 225));
+                    g2.setColor(new Color(65, 105, 225)); 
                     g2.fillArc(50, 30, 150, 150, 90, anguloVenta);
                     
                     g2.setColor(new Color(220, 20, 60)); 
@@ -789,7 +832,6 @@ public class VentanaPrincipal extends JFrame {
         return panel;
     }
 
-
     private JLabel lblBienvenidaEmpleado;
     private JLabel lblTurnoEmpleado;
 
@@ -819,7 +861,13 @@ public class VentanaPrincipal extends JFrame {
             if (nuevoDia != null && !nuevoDia.isEmpty() && usuarioActual instanceof Empleado) {
                 Empleado emp = (Empleado) usuarioActual;
                 Turno tSimulado = new Turno(nuevoDia, "08:00", "16:00");
-                emp.solicitarCambioTurno(tSimulado, emp.getTurno(), emp.getId());
+                
+                Turno turnoActual = emp.getTurno();
+                if (turnoActual == null) {
+                    turnoActual = new Turno("Ninguno", "00:00", "00:00"); 
+                }
+                
+                emp.solicitarCambioTurno(tSimulado, turnoActual, emp.getId());
                 
                 String msgSolicitud = emp.getUsername() + " (" + emp.getClass().getSimpleName() + ") solicita cambio para el día: " + nuevoDia;
                 solicitudesTurnos.add(msgSolicitud);
@@ -828,10 +876,10 @@ public class VentanaPrincipal extends JFrame {
             }
         });
         panelTurno.add(btnCambiarTurno);
-        tabbedPane.addTab("🕒 Mi Turno", panelTurno);
+        tabbedPane.addTab("Mi Turno", panelTurno);
 
         JPanel panelSugerencias = new JPanel(new GridBagLayout());
-        JButton btnSugerir = new JButton("Sugerir Nuevo Platillo");
+        JButton btnSugerir = new JButton("💡 Sugerir Nuevo Platillo");
         btnSugerir.addActionListener(e -> {
             String platillo = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo platillo:");
             if (platillo != null && !platillo.trim().isEmpty() && usuarioActual instanceof Empleado) {
@@ -840,7 +888,7 @@ public class VentanaPrincipal extends JFrame {
             }
         });
         panelSugerencias.add(btnSugerir);
-        tabbedPane.addTab("☕ Sugerencias", panelSugerencias);
+        tabbedPane.addTab("Sugerencias", panelSugerencias);
 
         JPanel panelTorneosE = new JPanel(new BorderLayout());
         String[] colTorneosE = {"Juego", "Tipo", "Horario", "Cupos Restantes"};
@@ -849,13 +897,13 @@ public class VentanaPrincipal extends JFrame {
         panelTorneosE.add(new JScrollPane(tablaTorneosE), BorderLayout.CENTER);
 
         JPanel pnlAccionesTE = new JPanel();
-        JButton btnInscribirE = new JButton("Inscribirse al Torneo");
+        JButton btnInscribirE = new JButton(" Inscribirse al Torneo");
         
         btnInscribirE.addActionListener(e -> {
             int fila = tablaTorneosE.getSelectedRow();
             if(fila >= 0) {
                 Torneo t = sistema.getTorneos().get(fila);
-                boolean exito = t.inscribir(usuarioActual, 1);
+                boolean exito = t.inscribir(usuarioActual, 1); 
                 if(exito) {
                     JOptionPane.showMessageDialog(this, "Inscripción exitosa al torneo de " + t.getJuego().getNombre());
                     actualizarPanelEmpleado();
@@ -869,7 +917,7 @@ public class VentanaPrincipal extends JFrame {
         
         pnlAccionesTE.add(btnInscribirE);
         panelTorneosE.add(pnlAccionesTE, BorderLayout.SOUTH);
-        tabbedPane.addTab("⚔️ Torneos", panelTorneosE);
+        tabbedPane.addTab("Torneos", panelTorneosE);
 
         panel.add(tabbedPane, BorderLayout.CENTER);
         return panel;
@@ -885,7 +933,6 @@ public class VentanaPrincipal extends JFrame {
             } else {
                 lblTurnoEmpleado.setText("Turno Actual: No asignado");
             }
-
 
             if (modeloTorneosEmpleado != null) {
                 modeloTorneosEmpleado.setRowCount(0);
@@ -903,7 +950,7 @@ public class VentanaPrincipal extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new VentanaPrincipal().setVisible(true);
+            new Interfaz().setVisible(true);
         });
     }
 }
