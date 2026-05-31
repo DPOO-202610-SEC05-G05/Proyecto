@@ -1,8 +1,4 @@
 package uniandes.dpoo.proyecto.cafe.implementación;
-<<<<<<< HEAD
-=======
-
->>>>>>> b91631047a9b8999e30f38d6077c05492653beb9
 public class InventarioPrestamo extends Inventario{
     private int cantidadDisponible;
 
