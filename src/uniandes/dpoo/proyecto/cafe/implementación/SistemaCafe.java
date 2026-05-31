@@ -135,6 +135,24 @@ public class SistemaCafe {
         return disponibles;
     }
 
+    public List<InventarioVenta> getInventariosVenta() {
+        return this.inventarioVenta;
+    }
+
+    public InventarioVenta buscarInventarioVenta(String nombreJuego) {
+        for (InventarioVenta inv : inventarioVenta) {
+            if (inv.getJuego().getNombre().equals(nombreJuego)) return inv;
+        }
+        return null;
+    }
+
+    public InventarioPrestamo buscarInventarioPrestamo(String nombreJuego) {
+        for (InventarioPrestamo inv : inventarioPrestamo) {
+            if (inv.getJuego().getNombre().equals(nombreJuego)) return inv;
+        }
+        return null;
+    }
+
     public boolean intentarIngresarClientes(int cantidadPersonas) {
     int capacidadMax = getCapacidadMax();
 
@@ -183,6 +201,15 @@ public class SistemaCafe {
         return new TorneoAmistoso(null, 0, null, false);
     }
 
+    public Usuario loginGUI(String username, String password) {
+        for(Usuario u : usuariosSistema){
+            if(u.getUsername().equals(username) && u.getPassword().equals(password)){
+                return u;
+            }
+        }
+        return null; 
+    }
+
     public static void main(String[] args) {
         SistemaCafe sistema = new SistemaCafe();
         sistema.menuPrincipal();
@@ -220,7 +247,7 @@ public class SistemaCafe {
             if(opcion == 1){
                 Usuario usuario = login(sc);
                 if(usuario == null || !usuario.esValido()){
-                    continue; //continua, hace las verificaciones pero no logra nada, entonces vuelve al menú... (más costoso pero no retorna null)
+                    continue; 
                 }
                 if(usuario instanceof Cliente){
                     menuCliente(sc, (Cliente) usuario, torneo);
@@ -382,7 +409,7 @@ public class SistemaCafe {
                 return valor;
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Debes ingresar un número válido.");
-                sc.nextLine(); // limpiar buffer
+                sc.nextLine(); 
                 }
             }
         }
