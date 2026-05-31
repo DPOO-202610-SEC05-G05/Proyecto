@@ -1,4 +1,4 @@
-package uniandes.dpoo.proyecto.cafe;
+package uniandes.dpoo.proyecto.cafe.implementación;
 public class Juego {
     private int id;
     private String nombre;
